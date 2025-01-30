@@ -1,0 +1,132 @@
+/* Process Section Container */
+.process-section {
+  min-height: 100vh;
+  padding: 100px 20px; /* Increased vertical padding */
+  background-color: #000000;
+  text-align: center;
+  position: relative;
+}
+
+/* Section Heading */
+.process-heading {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+/* Section Description */
+.process-description {
+  font-size: 1.1rem;
+  color: #c0c0c0; /* Light gray for better contrast */
+  margin-bottom: 4rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.7;
+}
+
+/* Steps Container */
+.process-steps {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  padding: 0 20px;
+}
+
+/* Individual Step Card */
+.step {
+  background-color: #1a1a1a; /* Darker background for contrast */
+  padding: 30px;
+  border-radius: 16px;
+  max-width: 320px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 1px solid #2e2e2e; /* Subtle border */
+}
+
+.step:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 32px rgba(46, 204, 113, 0.15);
+}
+
+/* Step Number Styling */
+.step-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #2ECC71; /* Green accent color */
+  margin-bottom: 1rem;
+  display: block;
+}
+
+/* Step Title */
+.step-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #ffffff; /* White for better contrast */
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+/* Step Description */
+.step-description {
+  font-size: 1rem;
+  color: #a0a0a0; /* Lighter gray */
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+/* Call-to-Action Button */
+.step-button {
+  padding: 12px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #2ECC71;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.step-button:hover {
+  background-color: #27AE60;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .process-section {
+    padding: 80px 20px;
+  }
+
+  .process-heading {
+    font-size: 2rem;
+  }
+
+  .process-description {
+    font-size: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .process-steps {
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .step {
+    max-width: 100%;
+    width: 90%;
+  }
+
+  .step-number {
+    font-size: 2rem;
+  }
+}
