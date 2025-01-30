@@ -1,0 +1,194 @@
+/* Enable smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Scroll Container */
+.scroll-container {
+  height: 100vh; /* Full viewport height */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+/* HomePage Styles */
+.homepage {
+  min-height: 100vh; /* Full viewport height */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #E8F5E9; /* Light green background */
+}
+
+/* Navbar Styles */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #E8F5E9; /* Match body background */
+  box-shadow: none; /* Remove shadow */
+  font-family: 'Urbanist', sans-serif;
+}
+
+.logo {
+  cursor: pointer;
+  padding: 10px;
+}
+
+.logo-image {
+  height: 70px; /* Adjust based on your logo's aspect ratio */
+  width: auto; /* Maintain aspect ratio */
+  transition: transform 0.3s ease;
+}
+
+.logo:hover .logo-image {
+  transform: scale(1.05);
+}
+
+.login-button {
+  padding: 8px 24px !important;
+  background-color: #CBEA7B !important;
+  border-radius: 35px !important;
+  transition: all 0.3s ease !important;
+}
+
+.login-button:hover {
+  background-color: #b2d465 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nav-links {
+  display: flex;
+  gap: 58px;
+}
+
+.nav-links span {
+  font-size: 16px;
+  font-weight: 500;
+  color: #66BB6A; /* Dark grey-blue text */
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.nav-links span:hover {
+  color: #2ECC71; /* Green color on hover */
+}
+/* Update the nav-links container */
+.nav-links {
+  display: flex;
+  gap: 24px;
+  align-items: center; /* Ensures vertical alignment */
+}
+
+/* Specific style for login button */
+.nav-links span:last-child {
+  padding: 8px 24px;
+  background-color: #CBEA7B;
+  border-radius: 35px;
+  color: #000000 !important; /* Black text */
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+}
+
+.nav-links span:last-child:hover {
+  background-color: #b2d465;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Regular nav items */
+.nav-links span:not(:last-child) {
+  padding: 8px 12px; /* Matching vertical padding */
+}
+
+/* HomePage Content Styles */
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 60px 10px;
+  max-width: 1200px;
+  margin:  auto;
+  font-family: 'Urbanist', sans-serif;
+  color: #34495E; /* Dark grey-blue text color */
+}
+
+.image-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-image {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 43px;
+}
+
+.text-content {
+  flex: 1;
+  max-width: 500px;
+  margin-left: 40px; /* Space between image and text */
+}
+
+.heading {
+  font-size: 40px;
+  font-weight: 700;
+  font-family: 'Urbanist', sans-serif;
+  margin-bottom: 0px;
+  color: #34495E; /* Dark grey-blue text */
+}
+
+.subheading {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: #34495E; /* Dark grey-blue text */
+  margin-bottom: 2px;
+}
+
+.description {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #34495E; /* Dark grey-blue text */
+  margin-bottom: 32px;
+}
+
+.button {
+  padding: 16px 32px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #000000;
+  background: #CBEA7B; /* Solid green button */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    padding: 40px 20px;
+  }
+
+  .text-content {
+    margin-left: 0;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .home-image {
+    max-width: 100%;
+  }
+}
