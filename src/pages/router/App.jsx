@@ -1,8 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import HomePage from "../homepage/HomePage";
-import AuthPage from "../../AuthPage";
-import ProfileSetup from "../../ProfileSetup";
 import Login from "../login/login";
 import FirstNameForm from "../registration/firstname";
 import GoalSelection from "../registration/GoalSelection";
@@ -23,8 +21,6 @@ function App() {
         <Route path="/" element={<Navigate to="/homepage" />} />
 
         <Route path="/homepage" element={<HomePage />} />
-        <Route path="/authpage" element={<AuthPage />} />
-        <Route path="/profile-setup" element={<ProfileSetup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/firstname" element={<FirstNameForm />} />
         <Route path="/goalselector" element={<GoalSelection />} />
