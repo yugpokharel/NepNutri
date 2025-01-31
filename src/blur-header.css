@@ -1,0 +1,18 @@
+.blur-section {
+  position: relative;
+  transition: filter 0.3s ease;
+  filter: blur(calc(var(--blur-amount) * 10px));
+}
+
+.blur-section::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, var(--blur-amount));
+  pointer-events: none;
+  transition: background 0.3s ease;
+}
+

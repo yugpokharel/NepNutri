@@ -1,0 +1,76 @@
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f8f9fa;
+    text-align: center;
+    position: relative;
+}
+
+.logo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    cursor: pointer;
+}
+
+.logo-image {
+    height: 40px;
+}
+
+.profile-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.profile-image {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+
+.dashboard-content {
+    background: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    max-width: 400px;
+}
+
+.welcome-text {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.dashboard-heading {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.dashboard-description {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.tracking-btn {
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #4caf50;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.tracking-btn:hover {
+    background-color: #45a049;
+}

@@ -1,0 +1,88 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Instead of centering everything */
+    padding: 10px 20px;
+    background-color: #ffffff;
+    height: auto; /* Removing 100vh to prevent full-screen navbar */
+}
+
+.logo {
+    cursor: pointer;
+    margin-right: 20px; /* Instead of margin-bottom to prevent extra spacing */
+}
+
+.logo-image {
+    height: 40px;
+}
+
+
+.form-container {
+    width: 400px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.progress-bar {
+    height: 6px;
+    background: #e0e0e0;
+    border-radius: 3px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    background: #4caf50;
+}
+
+.comment-heading {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.comment-description {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 0px;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.back-btn, .next-btn {
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.back-btn {
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+.back-btn:hover {
+    background-color: #ccc;
+}
+
+.next-btn {
+    background-color: #4caf50;
+    color: #fff;
+}
+
+.next-btn:hover {
+    background-color: #45a049;
+}

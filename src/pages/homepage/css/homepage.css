@@ -1,0 +1,179 @@
+/* General styles */
+body {
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.galaxy-scroll {
+  overflow-x: hidden;
+}
+
+/* Homepage styles */
+.neo-homepage {
+  position: relative;
+  z-index: 1;
+  background: white;
+  padding: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Navbar styles */
+.logo-planet {
+  max-height: 50px; /* Adjust height */
+  max-width: 150px; /* Adjust width */
+  width: auto; /* Ensure aspect ratio is maintained */
+  height: auto;
+}
+
+.cosmic-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+}
+
+.nav-stellar-links {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.link-star {
+  cursor: pointer;
+  font-size: 16px;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.link-star:hover {
+  color: #90b290;
+}
+
+.login-stardust {
+  background-color: #cbea7b;
+  color: black !important;
+  padding: 10px 16px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.login-stardust:hover {
+  background-color: #b8d56e;
+}
+
+/* Container styles */
+.nebula-container {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  padding: 30px 0; /* Reduced padding for better spacing */
+}
+
+.galaxy-image {
+  flex: 1;
+}
+
+.space-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.space-image:hover {
+  transform: scale(1.02);
+}
+
+.cosmic-text {
+  flex: 1;
+}
+
+.subheading-galaxy {
+  font-size: 18px;
+  color: #758d38;
+  margin-bottom: 10px;
+}
+
+.main-heading {
+  font-size: 30px; /* Adjusted for better balance */
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.cosmic-description {
+  font-size: 16px;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.galactic-button {
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #000000;
+  background: #cbea7b;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  width: auto;
+}
+
+.galactic-button:hover {
+  background-color: #b8d56e;
+  transform: translateY(-2px);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .neo-homepage {
+    padding: 20px;
+  }
+
+  .nebula-container {
+    flex-direction: column;
+    padding: 20px 0;
+  }
+
+  .cosmic-navbar {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-stellar-links {
+    margin-top: 0;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .logo-planet {
+    height: 30px; /* Smaller for mobile */
+    max-width: 100px;
+  }
+
+  .main-heading {
+    font-size: 26px;
+  }
+
+  .cosmic-description {
+    font-size: 14px;
+  }
+
+  .galactic-button {
+    width: 100%;
+  }
+}
+
+/* Footer styles */
+.footer {
+  padding: 25px 20px;
+  background-color: #333;
+  color: white;
+  text-align: center;
+}

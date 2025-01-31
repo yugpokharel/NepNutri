@@ -1,0 +1,142 @@
+.philosophy-section {
+  padding: 60px 20px;
+  background-color: white;
+}
+
+.philosophy-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.philosophy-grid {
+  flex: 1;
+  position: relative;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-left,
+.image-right {
+  width: 30%;
+  height: 200px;
+  z-index: 1;
+}
+
+.side-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 24px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.image-center {
+  position: relative;
+  z-index: 2;
+  width: 40%;
+  height: 300px;
+  margin: 0 -5%;
+}
+
+.profile-qd {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 32px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.profile-text {
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  padding: 10px;
+  background-color: #617762;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile-text h3 {
+  margin: 0;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.profile-text p {
+  margin: 4px 0 0;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.8rem;
+}
+
+.philosophy-content {
+  flex: 1;
+}
+
+.philosophy-content h2 {
+  font-size: 18px;
+  color: #90b290;
+  margin-bottom: 10px;
+}
+
+.philosophy-content h1 {
+  font-size: 32px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.philosophy-content p {
+  font-size: 16px;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+@media (max-width: 1024px) {
+  .philosophy-container {
+    flex-direction: column;
+  }
+
+  .philosophy-grid,
+  .philosophy-content {
+    width: 100%;
+  }
+
+  .philosophy-grid {
+    margin-bottom: 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  .philosophy-grid {
+    flex-direction: column;
+    height: auto;
+    gap: 20px;
+  }
+
+  .image-left,
+  .image-right,
+  .image-center {
+    width: 80%;
+    height: 200px;
+  }
+
+  .image-center {
+    margin: 0;
+  }
+
+  .profile-text {
+    position: relative;
+    bottom: 0;
+    margin-top: 10px;
+  }
+}
+
