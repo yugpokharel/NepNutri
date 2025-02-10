@@ -1,0 +1,26 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "Yugg_12345",
+    "database": "NepNutri",
+    "host": "localhost",
+    "dialect": "postgres",
+    "port": 5432
+  },
+  "test": {
+    "username": "postgres",
+    "password": "Yugg_12345",
+    "database": "NepNutri_test",
+    "host": "localhost",
+    "dialect": "postgres",
+    "port": 5432
+  },
+  "production": {
+    "username": "postgres",
+    "password": "Yugg_12345",
+    "database": "NepNutri_prod",
+    "host": "localhost",
+    "dialect": "postgres",
+    "port": 5432
+  }
+}
