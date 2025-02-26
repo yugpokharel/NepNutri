@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../database/db');
+const bcrypt = require('bcryptjs');
 
 const User = sequelize.define('User', {
     id: {
@@ -7,53 +8,107 @@ const User = sequelize.define('User', {
         primaryKey: true,
         autoIncrement: true,
     },
-    firstname: {
+    firstName: {
         type: DataTypes.STRING,
         allowNull: false,
+        validate: {
+            is: /^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]+$/i,
+            notEmpty: true
+        }
     },
     email: {
         type: DataTypes.STRING,
-        allowNull: true,
-        validate: { isEmail: true },
+        allowNull: false,
+        unique: true,
+        validate: {
+            isEmail: true
+        }
     },
-    username: {
+    password: {
         type: DataTypes.STRING,
-        allowNull: true, 
-        validate: { len: [3, 50] },
+        allowNull: false,
+        validate: {
+            len: [8, 100]
+        }
     },
-    password_hash: {
+    goals: {
+        type: DataTypes.ARRAY(DataTypes.STRING),
+        allowNull: false
+    },
+    barriers: {
+        type: DataTypes.ARRAY(DataTypes.STRING),
+        allowNull: false
+    },
+    heightFeet: {
+        type: DataTypes.DECIMAL(5, 2),
+        allowNull: false,
+        validate: {
+            min: 1,
+            max: 8
+        }
+    },
+    heightInches: {
+        type: DataTypes.DECIMAL(5, 2),
+        allowNull: false,
+        validate: {
+            min: 0,
+            max: 11
+        }
+    },
+    currentWeight: {
+        type: DataTypes.DECIMAL(5, 2),
+        allowNull: false,
+        validate: {
+            min: 20,
+            max: 500
+        }
+    },
+    goalWeight: {
+        type: DataTypes.DECIMAL(5, 2),
+        allowNull: false,
+        // validate: {
+        //     isLessThanCurrentWeight(value) {
+        //         if (value >= this.currentWeight) {
+        //             throw new Error('Goal weight must be less than current weight for weight loss');
+        //         }
+        //     }
+        // }
+    },
+    country: {
         type: DataTypes.STRING,
-        allowNull: true, 
-        validate: { len: [8, 100] },
-    },
-    goal: {
-        type: DataTypes.ARRAY(DataTypes.STRING),  // Updated to store an array of strings
-        allowNull: true,
-    },
-    height: {
-        type: DataTypes.DECIMAL(5, 2),
-        allowNull: true,
-    },
-    weight: {
-        type: DataTypes.DECIMAL(5, 2),
-        allowNull: true,
+        allowNull: false
     },
     age: {
         type: DataTypes.INTEGER,
-        allowNull: true,
-    },
+        allowNull: false,
+        validate: {
+          min: 13,
+          max: 120
+        }
+      },
     gender: {
-        type: DataTypes.STRING(10),
-        allowNull: true,
-    },
-    goalweight: {
-        type: DataTypes.DECIMAL(5, 2),
-        allowNull: true,
-    },
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            isIn: [["Male", "Female", "Other"]]
+        }
+    }
 }, {
     tableName: 'users',
-    freezeTableName: true,
-    timestamps: false,
+    timestamps: true
+});
+
+// Password hashing hooks
+User.beforeCreate(async (user) => {
+    if (user.password) {
+        user.password = bcrypt.hashSync(user.password, 12);
+    }
+});
+
+User.beforeUpdate(async (user) => {
+    if (user.changed('password')) {
+        user.password = bcrypt.hashSync(user.password, 12);
+    }
 });
 
 module.exports = User;

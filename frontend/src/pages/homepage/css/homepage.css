@@ -4,10 +4,14 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensure the body takes at least the full viewport height */
 }
 
 .galaxy-scroll {
   overflow-x: hidden;
+  flex: 1; /* Allow the content to grow and fill the remaining space */
 }
 
 /* Homepage styles */
@@ -18,6 +22,7 @@ body {
   padding: 40px;
   max-width: 1200px;
   margin: 0 auto;
+  flex: 1; /* Ensure the homepage content takes up the remaining space */
 }
 
 /* Navbar styles */
@@ -70,6 +75,7 @@ body {
   align-items: center;
   gap: 30px;
   padding: 30px 0; /* Reduced padding for better spacing */
+  min-height: calc(100vh - 200px); /* Adjust based on header and footer height */
 }
 
 .galaxy-image {
@@ -138,6 +144,7 @@ body {
   .nebula-container {
     flex-direction: column;
     padding: 20px 0;
+    min-height: auto; /* Reset min-height for mobile */
   }
 
   .cosmic-navbar {
@@ -176,4 +183,5 @@ body {
   background-color: #333;
   color: white;
   text-align: center;
+  flex-shrink: 0; /* Prevent footer from shrinking */
 }

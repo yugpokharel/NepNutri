@@ -1,35 +1,41 @@
-// Import dependencies
-require('dotenv').config();
-const { Sequelize } = require('sequelize');  
+require("dotenv").config();
+const { Sequelize } = require("sequelize");
 
-// Create a new Sequelize instance
-const sequelize = new Sequelize(
-    process.env.DB_NAME,  // Ensure environment variables are loaded
-    process.env.DB_USER, 
-    process.env.DB_PASSWORD, 
-    {
-        host: process.env.DB_HOST,
-        dialect: 'postgres',
-        port: process.env.DB_PORT || 5432,
-        logging: false, // Disable logging for cleaner output
-        dialectOptions: process.env.NODE_ENV === 'production' ? {
-            ssl: {
-                require: true,
-                rejectUnauthorized: false
-            }
-        } : {}
-    }
-);
-
-// Test database connection
-async function testConnection() {
-    try {
-        await sequelize.authenticate();
-        console.log('✅ Database connection successful!');
-    } catch (error) {
-        console.error('❌ Unable to connect to the database:', error);
-    }
+// Check environment variables
+if (
+  !process.env.DB_NAME ||
+  !process.env.DB_USER ||
+  !process.env.DB_PASSWORD ||
+  !process.env.DB_HOST
+) {
+  console.error("❌ Missing database configuration in .env file.");
+  process.exit(1);
 }
 
-// Export sequelize instance and testConnection function
+// Configure Sequelize
+const sequelize = new Sequelize(
+  process.env.DB_NAME,
+  process.env.DB_USER,
+  process.env.DB_PASSWORD,
+  {
+    host: process.env.DB_HOST,
+    dialect: "postgres",
+    port: process.env.DB_PORT || 5432,
+    logging: console.log, // Always log in development
+    dialectOptions: {}, // No SSL for local
+    // sync: { force: process.env.NODE_ENV !== "production" },
+  }
+);
+
+// Test connection
+async function testConnection() {
+  try {
+    console.log("🔌 Connecting to database...");
+    await sequelize.authenticate();
+    console.log("✅ Database connected!");
+  } catch (error) {
+    console.error("❌ Connection failed:", error.message);
+  }
+}
+
 module.exports = { sequelize, testConnection };

@@ -1,57 +1,154 @@
-import { useState } from "react"
-import "./dashboard.css"
-import { CircularProgress } from "./CircularProgress"
-import { DashboardHeader } from "./DashboardHeader"
-import { Navigation } from "./Navigation"
-import { RecentMeals } from "./RecentMeals"
-import { WaterIntake } from "./WaterIntake"
+import { useState, useEffect } from "react";
+import axios from "axios";
+import "./dashboard.css";
 
-export default function Dashboard() {
-  const [goalData] = useState({
-    total: 2100,
-    protein: 185,
-    carbs: 225,
-    fats: 83,
-  })
+export default function DashboardPage() {
+  const [userData, setUserData] = useState(null);
+  const [calories, setCalories] = useState(null);
+  const [macros, setMacros] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const [todayData] = useState({
-    total: 1450,
-    protein: 120,
-    carbs: 180,
-    fats: 55,
-  })
+  // Fetch user data from backend
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.post(
+          "http://localhost:5001/users/calculate",
+          { email: JSON.parse(localStorage.getItem('user'))?.email },
+          {
+            withCredentials: true,
+          }
+        );
+
+        console.log(response.data.data.calories);
+        
+
+        setCalories(response.data?.data?.calories);
+        setMacros(response.data?.data?.macros);
+        setLoading(false);
+      } catch (error) {
+        console.error("Failed to fetch user data:", error);
+        setLoading(false);
+      }
+    };
+    fetchUserData();
+  }, []);
+
+  // Replace hardcoded username with dynamic one from userData
+  const username = userData?.firstName || "User";
 
   return (
     <div className="dashboard">
-      <DashboardHeader username="yugdal" />
-      <Navigation />
+      {/* Header */}
+      <header className="header">
+        <div className="header-content">
+          <img
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-02-14%20at%2010.01.20%20PM-SEhypaHI1507ccFEJrr5my54OyTHo0.png"
+            alt="UpNutri"
+            className="logo"
+          />
+          <div className="header-right">
+            <span className="greeting">
+              Hi, <span className="username">{username}</span>
+            </span>
+            <button className="log-out-btn">⚙️</button>
+            <a href="#" className="header-link">
+              Help
+            </a>
+            <a href="#" className="header-link">
+              Settings
+            </a>
+            <button
+              onClick={() => {
+                localStorage.clear();
+                sessionStorage.clear();
+                window.location.href = "/login";
+              }}
+              className="logout-link"
+            >
+              Log Out
+            </button>
+            <div className="social-links">
+              <a href="#" className="social-link">
+                📷
+              </a>
+              <a href="#" className="social-link">
+                🐦
+              </a>
+            </div>
+          </div>
+        </div>
+      </header>
 
-      <main className="dashboard-content">
-        <h1 className="dashboard-title">Your Nutrition Dashboard</h1>
-        <div className="dashboard-grid">
-          <div className="progress-card">
-            <h2 className="card-title">Daily Goal</h2>
-            <CircularProgress data={goalData} total={goalData.total} showMacros={true} type="goal" />
+      {/* Main Nav */}
+      <nav className="main-nav">
+        <a href="#" className="nav-link active">
+          Home
+        </a>
+        <a href="#" className="nav-link">
+          Food
+        </a>
+        <a href="#" className="nav-link">
+          Exercises
+        </a>
+        <a href="#" className="nav-link">
+          Community
+        </a>
+        <a href="#" className="nav-link">
+          Blog
+        </a>
+      </nav>
+
+      {/* Content */}
+      <main className="main-content">
+        <div className="cards-grid">
+          {/* Goals Card */}
+          <div className="card">
+            <h2>Based on your information, your goals</h2>
+            {loading ? (
+              <p>Loading your goals...</p>
+            ) : (
+              <div className="goals-content">
+                <div className="circle-progress goals">
+                  <div className="circle-inner">
+                    <span className="value">{calories || 0}</span>
+                    <span className="label">kcal</span>
+                  </div>
+                </div>
+                <div className="macros">
+                  <div className="macro-item">
+                    <span className="dot protein"></span>
+                    <span>{macros?.protein || 0}g Protein</span>
+                  </div>
+                  <div className="macro-item">
+                    <span className="dot carbs"></span>
+                    <span>{macros?.carbs || 0}g Carbs</span>
+                  </div>
+                  <div className="macro-item">
+                    <span className="dot fat"></span>
+                    <span>{macros?.fats || 0}g Fat</span>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
 
-          <div className="progress-card">
-            <h2 className="card-title">Today's Progress</h2>
-            <CircularProgress data={todayData} total={goalData.total} showMacros={true} type="progress" />
-            <button className="log-food-btn">Log Food</button>
-          </div>
-
-          <div className="recent-meals-card">
-            <h2 className="card-title">Recent Meals</h2>
-            <RecentMeals />
-          </div>
-
-          <div className="water-intake-card">
-            <h2 className="card-title">Water Intake</h2>
-            <WaterIntake />
+          {/* Today Card */}
+          <div className="card">
+            <h2>Today</h2>
+            <div className="today-content">
+              <div className="circle-progress empty">
+                <div className="circle-inner">
+                  <span className="value">0</span>
+                  <span className="label">kcal</span>
+                </div>
+              </div>
+              <p className="empty-text">you haven't logged any food yet</p>
+              <button className="log-food-btn">Log Food</button>
+            </div>
           </div>
         </div>
       </main>
     </div>
-  )
+  );
 }
-

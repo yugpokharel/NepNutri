@@ -1,43 +1,55 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const { sequelize, testConnection } = require('./database/db'); // Import database connection
+const { sequelize, testConnection } = require('./database/db');
 const userRoutes = require('./routes/userRoute');
 
 const app = express();
 const PORT = process.env.PORT || 5001;
+const NODE_ENV = process.env.NODE_ENV || 'development';
 
 // Middleware
+app.use(express.json()); // Parse JSON bodies
+app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
 app.use(cors({
-    origin: `http://localhost:3000`, // Update this with your front-end URL if needed
-    credentials: true
+  origin: "http://localhost:3000", // Allow requests from this origin
+  credentials: true, // Allow cookies and credentials
 }));
-app.use(express.json()); // Built-in express middleware for JSON parsing
-app.use(express.urlencoded({ extended: true })); // Built-in express middleware for URL-encoded data
 
-// Test route
-app.get('/', (req, res) => {
-    res.send("Welcome to NepNutri API");
+// Logging middleware
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.url}`);
+  next();
 });
 
-// API Routes
+// Routes
+app.get('/', (req, res) => {
+  res.send("Welcome to NepNutri API");
+});
+
 app.use('/users', userRoutes);
 
-// Global Error Handling Middleware
-app.use((err, req, res, next) => {
-    console.error("Error:", err);
-    res.status(500).json({ error: "Internal Server Error", details: err.message });
-});
+// Handle preflight requests
+app.options('*', cors());
 
-// Sync database (Only for development - remove in production)
-sequelize.sync()
+// Sync database (only in development)
+if (NODE_ENV !== 'production') {
+  sequelize.sync()
     .then(() => console.log("✅ Database synced"))
     .catch(err => console.error("❌ Database sync failed:", err));
+}
 
-// Test database connection and start server
+// Error-handling middleware
+app.use((err, req, res, next) => {
+  console.error("❌ Error:", err.stack);
+  res.status(500).json({ message: "Something went wrong!" });
+});
+
+// Start server
 testConnection().then(() => {
-    app.listen(PORT, () => {
-        console.log(`🚀 Server running on: http://localhost:${PORT}`);
-    });
+  app.listen(PORT, () => {
+    console.log(`🚀 Server running on: http://localhost:${PORT}`);
+  });
 }).catch(err => {
-    console.error('❌ Failed to start server due to database connection issues:', err);
+  console.error('❌ Failed to start server:', err);
 });
