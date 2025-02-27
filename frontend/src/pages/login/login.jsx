@@ -4,6 +4,7 @@ import axios from "axios";
 import "./css/login.css";
 import mainImage from "../../assets/treadmill.jpeg";
 import foodImage from "../../assets/healthy-meal.jpg";
+import { Eye, EyeOff } from 'lucide-react';
 
 function Login() {
   const navigate = useNavigate();
@@ -11,23 +12,23 @@ function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = async (e) => {
-    e?.preventDefault(); // Prevent default form submission
+    e?.preventDefault();
     setIsLoading(true);
     setError("");
 
     try {
       const response = await axios.post(
-        "http://localhost:5001/users/login", // Adjust endpoint as needed
+        "http://localhost:5001/users/login",
         { email, password },
-        { withCredentials: true } // For session/cookie-based auth
+        { withCredentials: true }
       );
 
       if (response.status === 200) {
-        // Successful login
         navigate("/dash");
-        localStorage.setItem('user', JSON.stringify(response.data?.data))
+        localStorage.setItem('user', JSON.stringify(response.data?.data));
       }
     } catch (err) {
       console.error("Login failed:", err.response?.data || err);
@@ -40,35 +41,35 @@ function Login() {
       } else {
         errorMessage = "Login failed. Please try again.";
       }
-      setError(errorMessage)
+      setError(errorMessage);
     } finally {
-    setIsLoading(false);
+      setIsLoading(false);
     }
   };
 
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
-    <div>
-      {/* Main Container */}
+    <div className="login-page">
       <div className="login-container">
-        {/* Left Section - Image */}
         <div className="image-container">
-          <img src={mainImage} alt="Woman on treadmill" className="main-image" />
-          <img src={foodImage} alt="Healthy food" className="overlay-image" />
+          <img src={mainImage || "/placeholder.svg"} alt="Woman on treadmill" className="main-image" />
+          <img src={foodImage || "/placeholder.svg"} alt="Healthy food" className="overlay-image" />
         </div>
 
-        {/* Right Section - Login Form */}
         <div className="login-form">
           <h2>Log In to NepNutri</h2>
-          <p style={{ textAlign: "center", fontSize: "12px" }}>
-            Track your body and be healthy
-          </p>
+          <p className="subtitle">Track your body and be healthy</p>
 
-          {error && <p style={{ color: "red", textAlign: "center" }}>{error}</p>}
+          {error && <p className="error-message">{error}</p>}
 
           <form onSubmit={handleLogin}>
             <div className="input-group">
-              <label>Email Address</label>
+              <label htmlFor="email">Email Address</label>
               <input
+                id="email"
                 type="email"
                 placeholder="your@email.com"
                 value={email}
@@ -79,24 +80,33 @@ function Login() {
             </div>
 
             <div className="input-group">
-              <label>Password</label>
-              <input
-                type="password"
-                placeholder="*********"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                disabled={isLoading}
-              />
+              <label htmlFor="password">Password</label>
+              <div className="password-input">
+                <input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="*********"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  disabled={isLoading}
+                />
+                <button
+                  type="button"
+                  className="toggle-password"
+                  onClick={togglePasswordVisibility}
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                >
+                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
+              </div>
             </div>
 
             <div className="remember-forgot">
               <label>
                 <input type="checkbox" disabled={isLoading} /> Remember Me
               </label>
-              <span style={{ cursor: "pointer", color: "#3498DB" }}>
-                Forgot Password?
-              </span>
+              <span className="forgot-password">Forgot Password?</span>
             </div>
 
             <button
@@ -108,13 +118,22 @@ function Login() {
             </button>
           </form>
 
-          <button
-            className="create-account-btn"
-            onClick={() => navigate("/form")}
-            disabled={isLoading}
-          >
-            CREATE AN ACCOUNT
-          </button>
+          <div className="alternative-actions">
+            <button
+              className="create-account-btn"
+              onClick={() => navigate("/form")}
+              disabled={isLoading}
+            >
+              CREATE AN ACCOUNT
+            </button>
+            <button
+              className="admin-login-btn"
+              onClick={() => navigate("/adminlogin")}
+              disabled={isLoading}
+            >
+              ADMIN LOGIN
+            </button>
+          </div>
         </div>
       </div>
     </div>

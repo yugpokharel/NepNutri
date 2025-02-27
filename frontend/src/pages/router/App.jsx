@@ -5,7 +5,9 @@ import Login from "../login/login";
 import Dashboard from "../dashboard/dash";
 import MultiStepRegistration from "../registration/regform";
 import AddBreakfastAndMeal from "../dashboard/AddBreakfastAndMeal/AddBreakfastAndMeal";
-import BreakFast from "../../components/BreakFast/BreakFast";
+import AddFoodToBreakfast from "../dashboard/AddBreakfastAndMeal/Addfood";
+import AdminLogin from "../login/AdminLogin";
+import AdminDashboard from "../login/AdminDashboard";
 
 function App() {
   return (
@@ -17,10 +19,14 @@ function App() {
         <Route path="/form" element={<MultiStepRegistration />} />
         <Route path="/dash" element={<Dashboard />} />
         <Route path="/foodlog" element={<AddBreakfastAndMeal />} />
+        <Route path="/break" element={<AddFoodToBreakfast />} />
+        <Route path="/adminlogin" element={<AdminLogin />} />
+        <Route path="/admindash" element={<AdminDashboard />} />
 
 
-        //components 
-        <Route path="/foodlog/break" element={<BreakFast />} />
+
+
+
 
       </Routes>
     </Router>

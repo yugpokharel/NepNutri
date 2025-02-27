@@ -1,0 +1,912 @@
+{
+    "food_items": [
+      {
+        "name": "Dal Bhat (Nepali Lentil and Rice)",
+        "category": "Nepali Food",
+        "macros": {
+          "calories": 300,
+          "protein": 12,
+          "fat": 5,
+          "carbs": 50
+        }
+      },
+      {
+        "name": "Chicken Momo (Nepali Dumpling)",
+        "category": "Nepali Food",
+        "macros": {
+          "calories": 250,
+          "protein": 15,
+          "fat": 10,
+          "carbs": 25
+        }
+      },
+      {
+        "name": "Veg Momo",
+        "category": "Nepali Food",
+        "macros": {
+          "calories": 200,
+          "protein": 5,
+          "fat": 8,
+          "carbs": 30
+        }
+      },
+      {
+        "name": "Buff Momo",
+        "category": "Nepali Food",
+        "macros": {
+          "calories": 280,
+          "protein": 18,
+          "fat": 12,
+          "carbs": 25
+        }
+      },
+      {
+        "name": "Sel Roti (Nepali Rice Doughnut)",
+        "category": "Nepali Food",
+        "macros": {
+          "calories": 200,
+          "protein": 3,
+          "fat": 8,
+          "carbs": 35
+        }
+      },
+      {
+        "name": "Gundruk (Fermented Leafy Greens)",
+        "category": "Nepali Food",
+        "macros": {
+          "calories": 30,
+          "protein": 2,
+          "fat": 0,
+          "carbs": 6
+        }
+      },
+      {
+        "name": "Aloo Tama (Potato Bamboo Shoot Curry)",
+        "category": "Nepali Food",
+        "macros": {
+          "calories": 180,
+          "protein": 4,
+          "fat": 7,
+          "carbs": 25
+        }
+      },
+      {
+        "name": "Kwati (Mixed Bean Soup)",
+        "category": "Nepali Food",
+        "macros": {
+          "calories": 220,
+          "protein": 14,
+          "fat": 2,
+          "carbs": 38
+        }
+      },
+      {
+        "name": "Yomari (Steamed Rice Flour Dumpling)",
+        "category": "Nepali Food",
+        "macros": {
+          "calories": 180,
+          "protein": 2,
+          "fat": 4,
+          "carbs": 35
+        }
+      },
+      {
+        "name": "Chicken Tarkari (Nepali Chicken Curry)",
+        "category": "Nepali Food",
+        "macros": {
+          "calories": 320,
+          "protein": 25,
+          "fat": 15,
+          "carbs": 10
+        }
+      },
+      {
+        "name": "Dhindo (Cornmeal Porridge)",
+        "category": "Nepali Food",
+        "macros": {
+          "calories": 250,
+          "protein": 6,
+          "fat": 2,
+          "carbs": 50
+        }
+      },
+      {
+        "name": "Chatamari (Rice Crepe)",
+        "category": "Nepali Food",
+        "macros": {
+          "calories": 150,
+          "protein": 3,
+          "fat": 5,
+          "carbs": 25
+        }
+      },
+      {
+        "name": "Bara (Lentil Pancake)",
+        "category": "Nepali Food",
+        "macros": {
+          "calories": 160,
+          "protein": 8,
+          "fat": 6,
+          "carbs": 20
+        }
+      },
+      {
+        "name": "Sukuti (Dried Meat)",
+        "category": "Nepali Food",
+        "macros": {
+          "calories": 400,
+          "protein": 35,
+          "fat": 25,
+          "carbs": 0
+        }
+      },
+      {
+        "name": "Thukpa (Nepali Noodle Soup)",
+        "category": "Nepali Food",
+        "macros": {
+          "calories": 280,
+          "protein": 12,
+          "fat": 8,
+          "carbs": 40
+        }
+      },
+      {
+        "name": "Sikarni (Spiced Yogurt Dessert)",
+        "category": "Nepali Food",
+        "macros": {
+          "calories": 150,
+          "protein": 6,
+          "fat": 8,
+          "carbs": 12
+        }
+      },
+      {
+        "name": "Kheer (Rice Pudding)",
+        "category": "Nepali Food",
+        "macros": {
+          "calories": 200,
+          "protein": 5,
+          "fat": 7,
+          "carbs": 30
+        }
+      },
+      {
+        "name": "Pustakari (Nepali Sweet)",
+        "category": "Nepali Food",
+        "macros": {
+          "calories": 220,
+          "protein": 4,
+          "fat": 10,
+          "carbs": 32
+        }
+      },
+      {
+        "name": "Jhol Momo (Momo in Soup)",
+        "category": "Nepali Food",
+        "macros": {
+          "calories": 270,
+          "protein": 14,
+          "fat": 10,
+          "carbs": 30
+        }
+      },
+      {
+        "name": "Aloo Bodi Tama (Potato Black-Eyed Pea Curry)",
+        "category": "Nepali Food",
+        "macros": {
+          "calories": 200,
+          "protein": 6,
+          "fat": 8,
+          "carbs": 28
+        }
+      },
+      {
+        "name": "Rayo Saag (Mustard Greens)",
+        "category": "Nepali Food",
+        "macros": {
+          "calories": 40,
+          "protein": 3,
+          "fat": 0.5,
+          "carbs": 7
+        }
+      },
+      {
+        "name": "Chhurpi (Hard Cheese)",
+        "category": "Nepali Food",
+        "macros": {
+          "calories": 350,
+          "protein": 30,
+          "fat": 25,
+          "carbs": 0
+        }
+      },
+      {
+        "name": "Masu (Spiced Meat Curry)",
+        "category": "Nepali Food",
+        "macros": {
+          "calories": 340,
+          "protein": 28,
+          "fat": 20,
+          "carbs": 5
+        }
+      },
+      {
+        "name": "Fulaura (Black Lentil Fritters)",
+        "category": "Nepali Food",
+        "macros": {
+          "calories": 180,
+          "protein": 8,
+          "fat": 7,
+          "carbs": 22
+        }
+      },
+      {
+        "name": "Kalo Dal (Black Lentil Soup)",
+        "category": "Nepali Food",
+        "macros": {
+          "calories": 200,
+          "protein": 12,
+          "fat": 3,
+          "carbs": 30
+        }
+      },
+      {
+        "name": "Aloo Chop (Potato Fritter)",
+        "category": "Nepali Food",
+        "macros": {
+          "calories": 220,
+          "protein": 4,
+          "fat": 12,
+          "carbs": 28
+        }
+      },
+      {
+        "name": "Tilauri (Sesame Candy)",
+        "category": "Nepali Food",
+        "macros": {
+          "calories": 250,
+          "protein": 5,
+          "fat": 15,
+          "carbs": 25
+        }
+      },
+      {
+        "name": "Khichdi (Rice and Lentil Mix)",
+        "category": "Nepali Food",
+        "macros": {
+          "calories": 280,
+          "protein": 10,
+          "fat": 5,
+          "carbs": 45
+        }
+      },
+      {
+        "name": "Phapar ko Roti (Buckwheat Flatbread)",
+        "category": "Nepali Food",
+        "macros": {
+          "calories": 180,
+          "protein": 6,
+          "fat": 2,
+          "carbs": 35
+        }
+      },
+      {
+        "name": "Kodo ko Roti (Millet Flatbread)",
+        "category": "Nepali Food",
+        "macros": {
+          "calories": 190,
+          "protein": 5,
+          "fat": 2,
+          "carbs": 38
+        }
+      },
+
+      {
+            "name": "Choila",
+            "calories": 280,
+            "protein": 30,
+            "fat": 15,
+            "carbs": 5
+          },
+          {
+            "name": "Samosa",
+            "calories": 250,
+            "protein": 6,
+            "fat": 12,
+            "carbs": 30
+          },
+          {
+            "name": "Momo (Chicken)",
+            "calories": 350,
+            "protein": 20,
+            "fat": 18,
+            "carbs": 30
+          },
+          {
+            "name": "Dal Bhat (with Chicken)",
+            "calories": 700,
+            "protein": 50,
+            "fat": 20,
+            "carbs": 90
+          },
+          {
+            "name": "Sel Roti",
+            "calories": 300,
+            "protein": 5,
+            "fat": 12,
+            "carbs": 40
+          },
+          {
+            "name": "Gundruk Soup",
+            "calories": 80,
+            "protein": 4,
+            "fat": 1,
+            "carbs": 15
+          },
+          {
+            "name": "Yomari",
+            "calories": 200,
+            "protein": 3,
+            "fat": 6,
+            "carbs": 35
+          },
+          {
+            "name": "Rice (1 cup)",
+            "calories": 200,
+            "protein": 4,
+            "fat": 0.5,
+            "carbs": 45
+          },
+          {
+            "name": "Lentils (Dal, 1 bowl)",
+            "calories": 150,
+            "protein": 10,
+            "fat": 2,
+            "carbs": 25
+          },
+          {
+            "name": "Pumpkin Curry",
+            "calories": 100,
+            "protein": 3,
+            "fat": 5,
+            "carbs": 12
+          },
+          {
+            "name": "Milk (1 cup)",
+            "calories": 120,
+            "protein": 8,
+            "fat": 5,
+            "carbs": 12
+          },
+          {
+            "name": "Egg (1 piece)",
+            "calories": 70,
+            "protein": 6,
+            "fat": 5,
+            "carbs": 1
+          },
+          {
+            "name": "Chicken Breast (100g)",
+            "calories": 165,
+            "protein": 31,
+            "fat": 3.6,
+            "carbs": 0
+          },
+          {
+            "name": "Peanut Butter (1 tbsp)",
+            "calories": 90,
+            "protein": 4,
+            "fat": 8,
+            "carbs": 3
+          },
+          {
+            "name": "Banana",
+            "calories": 105,
+            "protein": 1.3,
+            "fat": 0.3,
+            "carbs": 27
+          },
+  
+      {
+        "name": "Apple",
+        "category": "Fruit",
+        "macros": {
+          "calories": 95,
+          "protein": 0.5,
+          "fat": 0.3,
+          "carbs": 25
+        }
+      },
+      {
+        "name": "Banana",
+        "category": "Fruit",
+        "macros": {
+          "calories": 90,
+          "protein": 1,
+          "fat": 0.3,
+          "carbs": 23
+        }
+      },
+      {
+        "name": "Mango",
+        "category": "Fruit",
+        "macros": {
+          "calories": 135,
+          "protein": 1,
+          "fat": 0.5,
+          "carbs": 35
+        }
+      },
+      {
+        "name": "Pomegranate",
+        "category": "Fruit",
+        "macros": {
+          "calories": 83,
+          "protein": 1,
+          "fat": 1,
+          "carbs": 19
+        }
+      },
+      {
+        "name": "Dragon Fruit",
+        "category": "Fruit",
+        "macros": {
+          "calories": 60,
+          "protein": 1,
+          "fat": 0.5,
+          "carbs": 13
+        }
+      },
+      {
+        "name": "Orange",
+        "category": "Fruit",
+        "macros": {
+          "calories": 62,
+          "protein": 1,
+          "fat": 0.2,
+          "carbs": 15
+        }
+      },
+      {
+        "name": "Pineapple",
+        "category": "Fruit",
+        "macros": {
+          "calories": 82,
+          "protein": 1,
+          "fat": 0.2,
+          "carbs": 22
+        }
+      },
+      {
+        "name": "Kiwi",
+        "category": "Fruit",
+        "macros": {
+          "calories": 61,
+          "protein": 1,
+          "fat": 0.5,
+          "carbs": 15
+        }
+      },
+      {
+        "name": "Papaya",
+        "category": "Fruit",
+        "macros": {
+          "calories": 43,
+          "protein": 0.5,
+          "fat": 0.3,
+          "carbs": 11
+        }
+      },
+      {
+        "name": "Guava",
+        "category": "Fruit",
+        "macros": {
+          "calories": 68,
+          "protein": 2,
+          "fat": 1,
+          "carbs": 14
+        }
+      },
+      {
+        "name": "Lychee",
+        "category": "Fruit",
+        "macros": {
+          "calories": 66,
+          "protein": 1,
+          "fat": 0.4,
+          "carbs": 17
+        }
+      },
+      {
+        "name": "Jackfruit",
+        "category": "Fruit",
+        "macros": {
+          "calories": 95,
+          "protein": 2,
+          "fat": 0.6,
+          "carbs": 23
+        }
+      },
+      {
+        "name": "Watermelon",
+        "category": "Fruit",
+        "macros": {
+          "calories": 30,
+          "protein": 0.6,
+          "fat": 0.2,
+          "carbs": 8
+        }
+      },
+      {
+        "name": "Grapes",
+        "category": "Fruit",
+        "macros": {
+          "calories": 69,
+          "protein": 0.7,
+          "fat": 0.2,
+          "carbs": 18
+        }
+      },
+      {
+        "name": "Pear",
+        "category": "Fruit",
+        "macros": {
+          "calories": 101,
+          "protein": 0.6,
+          "fat": 0.2,
+          "carbs": 27
+        }
+      },
+      {
+        "name": "Plum",
+        "category": "Fruit",
+        "macros": {
+          "calories": 46,
+          "protein": 0.7,
+          "fat": 0.3,
+          "carbs": 11
+        }
+      },
+      {
+        "name": "Blueberry",
+        "category": "Fruit",
+        "macros": {
+          "calories": 57,
+          "protein": 0.7,
+          "fat": 0.3,
+          "carbs": 14
+        }
+      },
+      {
+        "name": "Strawberry",
+        "category": "Fruit",
+        "macros": {
+          "calories": 32,
+          "protein": 0.7,
+          "fat": 0.3,
+          "carbs": 8
+        }
+      },
+      {
+        "name": "Cherry",
+        "category": "Fruit",
+        "macros": {
+          "calories": 50,
+          "protein": 1,
+          "fat": 0.3,
+          "carbs": 12
+        }
+      },
+      {
+        "name": "Avocado",
+        "category": "Fruit",
+        "macros": {
+          "calories": 160,
+          "protein": 2,
+          "fat": 15,
+          "carbs": 9
+        }
+      },
+      {
+        "name": "Durian",
+        "category": "Fruit",
+        "macros": {
+          "calories": 147,
+          "protein": 1,
+          "fat": 5,
+          "carbs": 27
+        }
+      },
+      {
+        "name": "Rambutan",
+        "category": "Fruit",
+        "macros": {
+          "calories": 68,
+          "protein": 0.9,
+          "fat": 0.2,
+          "carbs": 16
+        }
+      },
+      {
+        "name": "Starfruit",
+        "category": "Fruit",
+        "macros": {
+          "calories": 31,
+          "protein": 1,
+          "fat": 0.3,
+          "carbs": 7
+        }
+      },
+      {
+        "name": "Coconut (Flesh)",
+        "category": "Fruit",
+        "macros": {
+          "calories": 354,
+          "protein": 3,
+          "fat": 33,
+          "carbs": 15
+        }
+      },
+      {
+        "name": "Peach",
+        "category": "Fruit",
+        "macros": {
+          "calories": 39,
+          "protein": 1,
+          "fat": 0.3,
+          "carbs": 10
+        }
+      },
+  
+      {
+        "name": "Spinach",
+        "category": "Vegetable",
+        "macros": {
+          "calories": 23,
+          "protein": 3,
+          "fat": 0.4,
+          "carbs": 4
+        }
+      },
+      {
+        "name": "Cauliflower",
+        "category": "Vegetable",
+        "macros": {
+          "calories": 25,
+          "protein": 2,
+          "fat": 0.3,
+          "carbs": 5
+        }
+      },
+      {
+        "name": "Broccoli",
+        "category": "Vegetable",
+        "macros": {
+          "calories": 35,
+          "protein": 3,
+          "fat": 0.4,
+          "carbs": 7
+        }
+      },
+      {
+        "name": "Carrot",
+        "category": "Vegetable",
+        "macros": {
+          "calories": 41,
+          "protein": 1,
+          "fat": 0.2,
+          "carbs": 10
+        }
+      },
+      {
+        "name": "Potato",
+        "category": "Vegetable",
+        "macros": {
+          "calories": 77,
+          "protein": 2,
+          "fat": 0.1,
+          "carbs": 17
+        }
+      },
+      {
+        "name": "Tomato",
+        "category": "Vegetable",
+        "macros": {
+          "calories": 18,
+          "protein": 1,
+          "fat": 0.2,
+          "carbs": 4
+        }
+      },
+      {
+        "name": "Cabbage",
+        "category": "Vegetable",
+        "macros": {
+          "calories": 25,
+          "protein": 1,
+          "fat": 0.1,
+          "carbs": 6
+        }
+      },
+      {
+        "name": "Eggplant",
+        "category": "Vegetable",
+        "macros": {
+          "calories": 25,
+          "protein": 1,
+          "fat": 0.2,
+          "carbs": 6
+        }
+      },
+      {
+        "name": "Zucchini",
+        "category": "Vegetable",
+        "macros": {
+          "calories": 17,
+          "protein": 1,
+          "fat": 0.3,
+          "carbs": 3
+        }
+      },
+      {
+        "name": "Bell Pepper",
+        "category": "Vegetable",
+        "macros": {
+          "calories": 20,
+          "protein": 1,
+          "fat": 0.2,
+          "carbs": 5
+        }
+      },
+      {
+        "name": "Okra",
+        "category": "Vegetable",
+        "macros": {
+          "calories": 33,
+          "protein": 2,
+          "fat": 0.2,
+          "carbs": 7
+        }
+      },
+      {
+        "name": "Green Beans",
+        "category": "Vegetable",
+        "macros": {
+          "calories": 31,
+          "protein": 2,
+          "fat": 0.2,
+          "carbs": 7
+        }
+      },
+      {
+        "name": "Peas",
+        "category": "Vegetable",
+        "macros": {
+          "calories": 81,
+          "protein": 5,
+          "fat": 0.4,
+          "carbs": 14
+        }
+      },
+      {
+        "name": "Radish",
+        "category": "Vegetable",
+        "macros": {
+          "calories": 16,
+          "protein": 0.7,
+          "fat": 0.1,
+          "carbs": 3
+        }
+      },
+      {
+        "name": "Beetroot",
+        "category": "Vegetable",
+        "macros": {
+          "calories": 43,
+          "protein": 2,
+          "fat": 0.2,
+          "carbs": 10
+        }
+      },
+      {
+        "name": "Mushroom",
+        "category": "Vegetable",
+        "macros": {
+          "calories": 22,
+          "protein": 3,
+          "fat": 0.3,
+          "carbs": 3
+        }
+      },
+      {
+        "name": "Kale",
+        "category": "Vegetable",
+        "macros": {
+          "calories": 49,
+          "protein": 4,
+          "fat": 0.9,
+          "carbs": 9
+        }
+      },
+      {
+        "name": "Lettuce",
+        "category": "Vegetable",
+        "macros": {
+          "calories": 15,
+          "protein": 1,
+          "fat": 0.2,
+          "carbs": 3
+        }
+      },
+      {
+        "name": "Asparagus",
+        "category": "Vegetable",
+        "macros": {
+          "calories": 20,
+          "protein": 2,
+          "fat": 0.1,
+          "carbs": 4
+        }
+      },
+      {
+        "name": "Artichoke",
+        "category": "Vegetable",
+        "macros": {
+          "calories": 47,
+          "protein": 3,
+          "fat": 0.2,
+          "carbs": 11
+        }
+      },
+      {
+        "name": "Leek",
+        "category": "Vegetable",
+        "macros": {
+          "calories": 61,
+          "protein": 1,
+          "fat": 0.3,
+          "carbs": 14
+        }
+      },
+      {
+        "name": "Sweet Potato",
+        "category": "Vegetable",
+        "macros": {
+          "calories": 86,
+          "protein": 2,
+          "fat": 0.1,
+          "carbs": 20
+        }
+      },
+      {
+        "name": "Pumpkin",
+        "category": "Vegetable",
+        "macros": {
+          "calories": 26,
+          "protein": 1,
+          "fat": 0.1,
+          "carbs": 7
+        }
+      },
+      {
+        "name": "Cucumber",
+        "category": "Vegetable",
+        "macros": {
+          "calories": 16,
+          "protein": 0.7,
+          "fat": 0.1,
+          "carbs": 4
+        }
+      },
+      {
+        "name": "Celery",
+        "category": "Vegetable",
+        "macros": {
+          "calories": 16,
+          "protein": 0.7,
+          "fat": 0.2,
+          "carbs": 3
+        }
+      }
+    ]
+  }

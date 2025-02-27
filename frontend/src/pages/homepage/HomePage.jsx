@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "./css/homepage.css";
-import counter from "../../assets/counter.png";
+import counter from "../../assets/ui.jpg";
 import ProcessSection from "./ProcessSection";
 import logo from "../../assets/logo.png";
 import Footer from "./footer";
