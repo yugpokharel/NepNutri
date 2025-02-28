@@ -126,8 +126,17 @@ exports.loginUser = async (req, res) => {
 };
 
 const calculateCaloriesAndMacros = (data) => {
-  const { gender, age, heightFeet, heightInches, currentWeight, goalType } =
-    data;
+  const { 
+    gender, 
+    age, 
+    heightFeet, 
+    heightInches, 
+    currentWeight, 
+    goalType,
+    activityLevel = "moderate", // New parameter with default
+    bodyFatPercentage = null,   // Optional parameter
+    weightLossRate = "moderate" // New parameter with default
+  } = data;
 
   // Convert height to centimeters
   const heightCm = heightFeet * 30.48 + heightInches * 2.54;
@@ -141,20 +150,48 @@ const calculateCaloriesAndMacros = (data) => {
     bmr = 10 * weightKg + 6.25 * heightCm - 5 * age - 161;
   }
 
-  // Assume moderate activity (1.55 multiplier)
-  const tdee = bmr * 1.55;
+  // Activity multipliers based on activity level
+  const activityMultipliers = {
+    sedentary: 1.2,      // Little or no exercise
+    light: 1.375,        // Light exercise 1-3 days/week
+    moderate: 1.55,      // Moderate exercise 3-5 days/week
+    active: 1.725,       // Active - hard exercise 6-7 days/week
+    veryActive: 1.9      // Very active - hard daily exercise & physical job
+  };
+
+  const multiplier = activityMultipliers[activityLevel] || 1.55;
+  const tdee = bmr * multiplier;
+
+  // Calculate weight loss deficit based on desired rate and current weight
+  const calculateWeightLossDeficit = () => {
+    // Base deficit on body weight (heavier individuals can handle larger deficits)
+    const baseDeficitPercentage = {
+      slow: 0.15,        // 15% deficit for slow, sustainable loss
+      moderate: 0.20,    // 20% deficit for moderate loss
+      aggressive: 0.25   // 25% deficit for faster loss
+    }[weightLossRate] || 0.20;
+    
+    // Cap the deficit to ensure it's not too extreme
+    const calculatedDeficit = tdee * baseDeficitPercentage;
+    const maxDeficit = 1000; // Maximum 1000 calorie deficit
+    
+    return Math.min(calculatedDeficit, maxDeficit);
+  };
 
   // Adjust calories based on goal
   let dailyCalories;
   switch (goalType) {
     case "weight_loss":
-      dailyCalories = tdee - 500;
+      const deficit = calculateWeightLossDeficit();
+      dailyCalories = tdee - deficit;
       break;
     case "weight_gain":
-      dailyCalories = tdee + 500;
+      // Lean gaining approach - smaller surplus for less fat gain
+      dailyCalories = tdee + 350;
       break;
     case "muscle_gain":
-      dailyCalories = tdee + 250;
+      // Slightly higher for dedicated muscle building
+      dailyCalories = tdee + 450;
       break;
     case "maintain":
       dailyCalories = tdee;
@@ -163,45 +200,68 @@ const calculateCaloriesAndMacros = (data) => {
       dailyCalories = tdee;
   }
 
-  // Minimum calorie safety net
-  dailyCalories = Math.max(dailyCalories, gender === "Female" ? 1200 : 1500);
+  // Minimum calorie safety net based on gender and height
+  const minCalories = gender === "Female" 
+    ? Math.max(1200, 10 * heightCm * 0.1) 
+    : Math.max(1500, 10 * heightCm * 0.12);
+  
+  dailyCalories = Math.max(dailyCalories, minCalories);
 
-  // Macro ratios based on goal
-  let proteinPercentage, carbsPercentage, fatsPercentage;
-  switch (goalType) {
-    case "weight_loss":
-      proteinPercentage = 0.4;
-      carbsPercentage = 0.3;
-      fatsPercentage = 0.3;
-      break;
-    case "weight_gain":
-    case "muscle_gain":
-      proteinPercentage = 0.3;
-      carbsPercentage = 0.4;
-      fatsPercentage = 0.3;
-      break;
-    case "maintain":
-      proteinPercentage = 0.35;
-      carbsPercentage = 0.35;
-      fatsPercentage = 0.3;
-      break;
-    default:
-      proteinPercentage = 0.35;
-      carbsPercentage = 0.35;
-      fatsPercentage = 0.3;
+  // Calculate protein based on body weight and goal
+  const calculateProteinGrams = () => {
+    // Higher protein for weight loss to preserve muscle mass
+    if (goalType === "weight_loss") {
+      // Use body fat percentage if available for more accurate lean mass calculation
+      if (bodyFatPercentage !== null) {
+        const leanMass = weightKg * (1 - bodyFatPercentage / 100);
+        return leanMass * 2.2; // 2.2g per kg of lean mass
+      }
+      return weightKg * 2.0; // 2.0g per kg of total weight
+    } else if (goalType === "muscle_gain") {
+      return weightKg * 1.8; // 1.8g per kg for muscle gain
+    } else {
+      return weightKg * 1.6; // 1.6g per kg for maintenance
+    }
+  };
+
+  // Calculate macros based on goal and protein needs
+  const proteinGrams = calculateProteinGrams();
+  const proteinCalories = proteinGrams * 4;
+  
+  // Adjust fat and carb ratios based on goal
+  let fatsPercentage;
+  if (goalType === "weight_loss") {
+    // Higher fat percentage for weight loss (helps with satiety)
+    fatsPercentage = 0.35;
+  } else {
+    fatsPercentage = 0.30;
   }
-
-  const proteinGrams = (dailyCalories * proteinPercentage) / 4;
-  const carbsGrams = (dailyCalories * carbsPercentage) / 4;
-  const fatsGrams = (dailyCalories * fatsPercentage) / 9;
+  
+  // Calculate remaining calories after protein
+  const remainingCalories = dailyCalories - proteinCalories;
+  
+  // Calculate fat grams based on percentage of remaining calories
+  const fatCalories = remainingCalories * fatsPercentage;
+  const fatsGrams = fatCalories / 9;
+  
+  // Remaining calories go to carbs
+  const carbsCalories = remainingCalories - fatCalories;
+  const carbsGrams = carbsCalories / 4;
 
   return {
     calories: Math.round(dailyCalories),
+    tdee: Math.round(tdee),
+    bmr: Math.round(bmr),
     macros: {
       protein: Math.round(proteinGrams),
       carbs: Math.round(carbsGrams),
       fats: Math.round(fatsGrams),
     },
+    macroPercentages: {
+      protein: Math.round((proteinCalories / dailyCalories) * 100),
+      carbs: Math.round((carbsCalories / dailyCalories) * 100),
+      fats: Math.round((fatCalories / dailyCalories) * 100),
+    }
   };
 };
 

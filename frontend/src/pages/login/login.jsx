@@ -126,13 +126,6 @@ function Login() {
             >
               CREATE AN ACCOUNT
             </button>
-            <button
-              className="admin-login-btn"
-              onClick={() => navigate("/adminlogin")}
-              disabled={isLoading}
-            >
-              ADMIN LOGIN
-            </button>
           </div>
         </div>
       </div>

@@ -1,0 +1,110 @@
+.contact-page {
+    padding: 80px 20px;
+    background-color: var(--background-alt);
+  }
+  
+  .contact-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: var(--background);
+    border-radius: var(--border-radius);
+    padding: 40px;
+    box-shadow: var(--shadow);
+  }
+  
+  .contact-title {
+    font-size: 36px;
+    color: var(--text-dark);
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .contact-description {
+    font-size: 18px;
+    color: var(--text-medium);
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .contact-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+  }
+  
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .contact-icon {
+    font-size: 24px;
+    color: var(--primary);
+  }
+  
+  .contact-item h3 {
+    font-size: 18px;
+    color: var(--text-dark);
+    margin-bottom: 5px;
+  }
+  
+  .contact-item p {
+    font-size: 16px;
+    color: var(--text-medium);
+  }
+  
+  .contact-form {
+    background-color: var(--background-alt);
+    padding: 30px;
+    border-radius: var(--border-radius);
+  }
+  
+  .contact-form h2 {
+    font-size: 24px;
+    color: var(--text-dark);
+    margin-bottom: 20px;
+  }
+  
+  .contact-form input,
+  .contact-form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid var(--primary-light);
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .contact-form textarea {
+    height: 150px;
+    resize: vertical;
+  }
+  
+  .submit-button {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submit-button:hover {
+    background-color: var(--primary-dark);
+  }
+  
+  @media (max-width: 768px) {
+    .contact-info {
+      flex-direction: column;
+      gap: 20px;
+    }
+  
+    .contact-item {
+      justify-content: flex-start;
+    }
+  }
+  
+  

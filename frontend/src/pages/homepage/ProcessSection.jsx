@@ -1,7 +1,9 @@
+import { Navigate, useNavigate } from "react-router-dom"
 import "./css/ProcessSection.css"
 import React from "react"
 
 function ProcessSection() {
+  const navigate = useNavigate()
   return (
     <section className="process-section">
       <div className="process-container">
@@ -40,7 +42,8 @@ function ProcessSection() {
             <div className="step-icon target-icon"></div>
             <h3 className="step-title">Sustainable habit building</h3>
             <p className="step-description">Personalized coaching to help you maintain lifelong healthy habits.</p>
-            <button className="step-button" aria-label="Start habit building">
+            <button className="step-button" aria-label="Start habit building"
+            onClick={() => navigate("/login")}>
               Get Started
               <span className="arrow-icon"></span>
             </button>
@@ -52,4 +55,200 @@ function ProcessSection() {
 }
 
 export default ProcessSection
+
+
+//
+///
+///
+///
+
+///
+///
+
+///
+///
+
+///
+///
+///
+
+
+///
+///
+///
+
+///
+///
+
+
+///
+///
+///
+
+///
+///
+
+///
+///
+///
+
+
+///
+///
+
+///
+///
+
+///
+///
+///
+
+///
+///
+///
+
+///
+///
+
+///
+///
+///
+
+
+///
+///
+
+///
+///
+
+///
+///
+///
+///
+///
+///
+
+///
+///
+
+///
+///
+///
+
+
+///
+///
+
+///
+///
+
+///
+///
+///
+///
+///
+///
+
+///
+///
+
+///
+///
+///
+
+
+///
+///
+
+///
+///
+
+///
+///
+///
+///
+///
+///
+
+///
+///
+
+///
+///
+///
+
+
+///
+///
+
+///
+///
+
+///
+///
+///
+///
+///
+///
+
+///
+///
+
+///
+///
+///
+
+
+///
+///
+
+///
+///
+
+///
+///
+///
+///
+///
+///
+
+///
+///
+
+///
+///
+///
+
+
+///
+///
+
+///
+///
+
+///
+///
+///
+///
+///
+///
+
+///
+///
+
+///
+///
+///
+
+
+///
+///
+
+///
+///
+
+///
+///
+///
+
 
