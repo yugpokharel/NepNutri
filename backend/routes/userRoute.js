@@ -10,4 +10,6 @@ router.post('/login', userController.loginUser);
 
 router.post('/calculate', userController.calculateUser);
 
+router.post('/forgot-password', userController.forgotPassword);
+
 module.exports = router;

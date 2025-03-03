@@ -4,6 +4,7 @@ import { useState, useEffect, useMemo, useCallback } from "react"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
 import logo from "../../assets/logo.png"
+
 import {
   Settings,
   HelpCircle,
@@ -85,7 +86,7 @@ export default function DashboardPage() {
     window.location.href = "/login"
   }, [])
 
-  const username = userData?.firstName || "User"
+  const username = JSON.parse(localStorage.getItem("user"))?.firstName || "User"
 
   // Calculate calorie contributions for each macro (for reference, though not displayed)
   const { proteinCalories, fatCalories, carbCalories, totalTodayCalories } = useMemo(() => {

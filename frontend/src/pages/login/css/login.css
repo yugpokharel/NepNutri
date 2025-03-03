@@ -206,6 +206,90 @@ button:disabled {
   cursor: not-allowed;
 }
 
+/* Modal styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  width: 90%;
+  max-width: 400px;
+  position: relative;
+}
+
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  color: var(--text-color);
+}
+
+.modal-content h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: var(--text-color);
+}
+
+.modal-content p {
+  font-size: 14px;
+  color: var(--text-color);
+  margin-bottom: 20px;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.modal-buttons button {
+  flex: 1;
+}
+
+.cancel-btn {
+  background-color: var(--border-color);
+  color: var(--text-color);
+}
+
+.cancel-btn:hover {
+  background-color: #d0d0d0;
+}
+
+/* Toast notification styles */
+.Toastify__toast-container {
+  width: 320px;
+}
+
+.Toastify__toast {
+  font-family: "Poppins", sans-serif;
+  border-radius: 8px;
+}
+
+.Toastify__toast--success {
+  background-color: var(--secondary-color);
+}
+
+.Toastify__toast--error {
+  background-color: var(--error-color);
+}
+
 @media (max-width: 768px) {
   .login-container {
     flex-direction: column;
@@ -222,6 +306,11 @@ button:disabled {
     max-width: 380px;
     padding: 30px;
   }
+
+  .modal-content {
+    width: 95%;
+    padding: 20px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -230,6 +319,10 @@ button:disabled {
   }
 
   .alternative-actions {
+    flex-direction: column;
+  }
+
+  .modal-buttons {
     flex-direction: column;
   }
 }

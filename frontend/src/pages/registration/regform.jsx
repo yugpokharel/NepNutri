@@ -8,8 +8,7 @@ import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import logo from "../../assets/logo.png"
 import success from "../../assets/success.png"
-import tips from "../../assets/tip.jpeg"
-import { CheckCircle, AlertCircle, ChevronLeft, ChevronRight } from "lucide-react"
+import { CheckCircle, AlertCircle, ChevronLeft, ChevronRight, Eye } from "lucide-react"
 import "./css/regform.css"
 
 // Unique class name prefix for this component
@@ -123,6 +122,10 @@ const schema = yup.object().shape({
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
       "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character",
     ),
+  confirmPassword: yup
+    .string()
+    .required("Please confirm your password")
+    .oneOf([yup.ref("password")], "Passwords must match"),
 })
 
 const MultiStepRegistration = () => {
@@ -168,6 +171,8 @@ const MultiStepRegistration = () => {
     setStep((prev) => Math.max(prev - 1, 1))
     // Scroll to top when changing steps
     window.scrollTo({ top: 0, behavior: "smooth" })
+    // Scroll to top when changing steps
+    window.scrollTo({ top: 0, behavior: "smooth" })
   }
 
   // Submit all form data
@@ -176,19 +181,16 @@ const MultiStepRegistration = () => {
     setIsProcessing(true)
 
     try {
-      // Log goalType and weight values for debugging
-      console.log("Goal Type:", data.goalType)
-      console.log("Current Weight:", data.currentWeight)
-      console.log("Goal Weight:", data.goalWeight)
+      // Remove confirmPassword from the data object
+      const { confirmPassword, ...dataToSend } = data
 
       // Send data to the backend
-      const response = await axios.post("http://localhost:5001/users/register", data, { withCredentials: true })
+      const response = await axios.post("http://localhost:5001/users/register", dataToSend, { withCredentials: true })
 
       console.log("Backend response:", response.data)
 
       if (response.status === 201) {
         setIsSuccess(true)
-        // navigate("/login");
       }
     } catch (error) {
       console.error("Registration failed:", error)
@@ -213,7 +215,7 @@ const MultiStepRegistration = () => {
   }, [isSuccess, navigate])
 
   // Show loading or success messages
-  if (isProcessing) return <ProcessingPage classPrefix={classPrefix} logo={logo} tips={tips} />
+  if (isProcessing) return <ProcessingPage classPrefix={classPrefix} logo={logo} />
   if (isSuccess) return <SuccessMessage classPrefix={classPrefix} success={success} />
 
   return (
@@ -283,7 +285,7 @@ const getFieldsForStep = (step) => {
     case 6:
       return ["heightFeet", "heightInches", "currentWeight", "goalWeight", "goalType"]
     case 7:
-      return ["email", "password"]
+      return ["email", "password", "confirmPassword"]
     default:
       return []
   }
@@ -315,26 +317,54 @@ const GoalStep = ({ errors, classPrefix }) => {
   const firstName = watch("firstName")
 
   const handleGoalClick = (goal) => {
-    const updatedGoals = selectedGoals.includes(goal) ? selectedGoals.filter((g) => g !== goal) : [goal] // Only allow single goal selection
+    let updatedGoals = [...selectedGoals]
+
+    // If goal is already selected, remove it
+    if (selectedGoals.includes(goal)) {
+      updatedGoals = selectedGoals.filter((g) => g !== goal)
+    } else {
+      // Check for invalid combinations
+      const incompatiblePairs = {
+        "Lose Weight": ["Gain Weight", "Maintain Weight"],
+        "Gain Weight": ["Lose Weight", "Maintain Weight"],
+        "Maintain Weight": ["Lose Weight", "Gain Weight"],
+      }
+
+      // Remove any incompatible goals
+      const incompatibleGoals = incompatiblePairs[goal] || []
+      updatedGoals = selectedGoals.filter((g) => !incompatibleGoals.includes(g))
+
+      // Add the new goal
+      updatedGoals.push(goal)
+    }
+
+    // Limit to max 2 goals
+    if (updatedGoals.length > 2) {
+      updatedGoals = updatedGoals.slice(-2)
+    }
 
     setValue("goals", updatedGoals)
 
-    // Map goal to goalType
-    const goalMap = {
-      "Lose Weight": "weight_loss",
-      "Gain Weight": "weight_gain",
-      "Gain Muscle": "muscle_gain",
-      "Maintain Weight": "maintain",
+    // Set primary goal type based on first selected goal
+    if (updatedGoals.length > 0) {
+      const primaryGoal = updatedGoals[0]
+      const goalMap = {
+        "Lose Weight": "weight_loss",
+        "Gain Weight": "weight_gain",
+        "Gain Muscle": "muscle_gain",
+        "Maintain Weight": "maintain",
+      }
+      setValue("goalType", goalMap[primaryGoal])
+    } else {
+      setValue("goalType", "")
     }
-
-    setValue("goalType", updatedGoals.length > 0 ? goalMap[updatedGoals[0]] : "")
   }
 
   return (
     <div className={`${classPrefix}-step-wrapper`}>
       <div className={`${classPrefix}-greeting`}>
         <h2 className={`${classPrefix}-step-title`}>Thanks {firstName || "there"}!</h2>
-        <p className={`${classPrefix}-step-subtitle`}>Now pick your Goal</p>
+        <p className={`${classPrefix}-step-subtitle`}>Select up to 2 goals that align with your fitness journey</p>
       </div>
       <div className={`${classPrefix}-goal-options`}>
         {goals.map((goal) => (
@@ -349,9 +379,19 @@ const GoalStep = ({ errors, classPrefix }) => {
         ))}
       </div>
 
-      {goalType && (
-        <div className={`${classPrefix}-goal-type-display`}>Selected goal type: {goalType.replace("_", " ")}</div>
+      {selectedGoals.length > 0 && (
+        <div className={`${classPrefix}-selected-goals`}>
+          <h3 className={`${classPrefix}-selected-goals-title`}>Your selected goals:</h3>
+          <div className={`${classPrefix}-goals-chips`}>
+            {selectedGoals.map((goal) => (
+              <div key={goal} className={`${classPrefix}-goal-chip`}>
+                {goal}
+              </div>
+            ))}
+          </div>
+        </div>
       )}
+
       {errors.goals && <p className={`${classPrefix}-error-message`}>{errors.goals.message}</p>}
     </div>
   )
@@ -549,8 +589,16 @@ const HeightWeightStep = ({ errors, classPrefix }) => {
   )
 }
 
+// Update the AccountCreationStep component to include password visibility toggle and password match indicator
 const AccountCreationStep = ({ errors, classPrefix }) => {
-  const { register } = useFormContext()
+  const { register, watch } = useFormContext()
+  const [showPassword, setShowPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+
+  const password = watch("password", "")
+  const confirmPassword = watch("confirmPassword", "")
+  const passwordsMatch = password && confirmPassword && password === confirmPassword
+  const passwordsMismatch = password && confirmPassword && password !== confirmPassword
 
   return (
     <div className={`${classPrefix}-step-wrapper`}>
@@ -564,13 +612,58 @@ const AccountCreationStep = ({ errors, classPrefix }) => {
         />
         {errors.email && <p className={`${classPrefix}-error-message`}>{errors.email.message}</p>}
 
-        <input
-          type="password"
-          placeholder="Password"
-          className={`${classPrefix}-input-field`}
-          {...register("password", { required: "Password is required" })}
-        />
+        <div className={`${classPrefix}-password-field-container`}>
+          <input
+            type={showPassword ? "text" : "password"}
+            placeholder="Password"
+            className={`${classPrefix}-input-field`}
+            {...register("password", { required: "Password is required" })}
+          />
+          <button
+            type="button"
+            className={`${classPrefix}-password-toggle`}
+            onClick={() => setShowPassword(!showPassword)}
+            aria-label={showPassword ? "Hide password" : "Show password"}
+          >
+            {showPassword ? <Eye size={18} /> : <Eye size={18} />}
+          </button>
+        </div>
         {errors.password && <p className={`${classPrefix}-error-message`}>{errors.password.message}</p>}
+
+        <div className={`${classPrefix}-password-field-container`}>
+          <input
+            type={showConfirmPassword ? "text" : "password"}
+            placeholder="Confirm Password"
+            className={`${classPrefix}-input-field`}
+            {...register("confirmPassword", {
+              required: "Please confirm your password",
+              validate: (value) => value === watch("password") || "Passwords do not match",
+            })}
+          />
+          <button
+            type="button"
+            className={`${classPrefix}-password-toggle`}
+            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+            aria-label={showConfirmPassword ? "Hide password" : "Show password"}
+          >
+            {showConfirmPassword ? <Eye size={18} /> : <Eye size={18} />}
+          </button>
+        </div>
+        {errors.confirmPassword && <p className={`${classPrefix}-error-message`}>{errors.confirmPassword.message}</p>}
+
+        {passwordsMatch && !errors.confirmPassword && (
+          <div className={`${classPrefix}-password-match ${classPrefix}-match`}>
+            <CheckCircle size={16} />
+            <span>Passwords match!</span>
+          </div>
+        )}
+
+        {passwordsMismatch && !errors.confirmPassword && (
+          <div className={`${classPrefix}-password-match ${classPrefix}-mismatch`}>
+            <AlertCircle size={16} />
+            <span>Passwords do not match</span>
+          </div>
+        )}
 
         <p className={`${classPrefix}-password-requirements`}>
           Password must be at least 8 characters and include uppercase, lowercase, number, and special character.
@@ -580,7 +673,20 @@ const AccountCreationStep = ({ errors, classPrefix }) => {
   )
 }
 
-const ProcessingPage = ({ classPrefix, logo, tips }) => {
+const ProcessingPage = ({ classPrefix, logo }) => {
+  const [factIndex, setFactIndex] = useState(0)
+  const facts = [
+    "Bananas are berries, but strawberries aren't!",
+  ]
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setFactIndex((prevIndex) => (prevIndex + 1) % facts.length)
+    }, 100)
+
+    return () => clearInterval(interval)
+  }, [])
+
   return (
     <div className={`${classPrefix}-processing-page`}>
       <div className={`${classPrefix}-logo`}>
@@ -588,14 +694,12 @@ const ProcessingPage = ({ classPrefix, logo, tips }) => {
       </div>
       <div className={`${classPrefix}-processing-container`}>
         <h2 className={`${classPrefix}-processing-text`}>Processing Your Information</h2>
-        <div className={`${classPrefix}-loading-indicator`}></div>
-        <div className={`${classPrefix}-info-box`}>
-          <p className={`${classPrefix}-info-title`}>💡 Did You Know?</p>
-          <p className={`${classPrefix}-info-text`}>
-            "Regular exercise boosts your resting metabolism, meaning your body continues to burn calories even while
-            you're at rest!"
-          </p>
-          <img src={tips || "/placeholder.svg"} alt="exercise tip" className={`${classPrefix}-info-image`} />
+        <div className={`${classPrefix}-banana-loader`}>
+          <div className={`${classPrefix}-banana`}></div>
+        </div>
+        <div className={`${classPrefix}-fun-fact-box`}>
+          <p className={`${classPrefix}-fun-fact-title`}>🍌 Banana Fact!</p>
+          <p className={`${classPrefix}-fun-fact-text`}>{facts[factIndex]}</p>
         </div>
       </div>
     </div>
