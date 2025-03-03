@@ -8,7 +8,8 @@ import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import logo from "../../assets/logo.png"
 import success from "../../assets/success.png"
-import { CheckCircle, AlertCircle, ChevronLeft, ChevronRight, Eye } from "lucide-react"
+import tips from "../../assets/tip.jpeg"
+import { CheckCircle, AlertCircle, ChevronLeft, ChevronRight } from "lucide-react"
 import "./css/regform.css"
 
 // Unique class name prefix for this component
@@ -181,16 +182,19 @@ const MultiStepRegistration = () => {
     setIsProcessing(true)
 
     try {
-      // Remove confirmPassword from the data object
-      const { confirmPassword, ...dataToSend } = data
+      // Log goalType and weight values for debugging
+      console.log("Goal Type:", data.goalType)
+      console.log("Current Weight:", data.currentWeight)
+      console.log("Goal Weight:", data.goalWeight)
 
       // Send data to the backend
-      const response = await axios.post("http://localhost:5001/users/register", dataToSend, { withCredentials: true })
+      const response = await axios.post("http://localhost:5001/users/register", data, { withCredentials: true })
 
       console.log("Backend response:", response.data)
 
       if (response.status === 201) {
         setIsSuccess(true)
+        // navigate("/login");
       }
     } catch (error) {
       console.error("Registration failed:", error)
@@ -215,7 +219,7 @@ const MultiStepRegistration = () => {
   }, [isSuccess, navigate])
 
   // Show loading or success messages
-  if (isProcessing) return <ProcessingPage classPrefix={classPrefix} logo={logo} />
+  if (isProcessing) return <ProcessingPage classPrefix={classPrefix} logo={logo} tips={tips} />
   if (isSuccess) return <SuccessMessage classPrefix={classPrefix} success={success} />
 
   return (
@@ -589,16 +593,8 @@ const HeightWeightStep = ({ errors, classPrefix }) => {
   )
 }
 
-// Update the AccountCreationStep component to include password visibility toggle and password match indicator
 const AccountCreationStep = ({ errors, classPrefix }) => {
   const { register, watch } = useFormContext()
-  const [showPassword, setShowPassword] = useState(false)
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
-
-  const password = watch("password", "")
-  const confirmPassword = watch("confirmPassword", "")
-  const passwordsMatch = password && confirmPassword && password === confirmPassword
-  const passwordsMismatch = password && confirmPassword && password !== confirmPassword
 
   return (
     <div className={`${classPrefix}-step-wrapper`}>
@@ -612,58 +608,24 @@ const AccountCreationStep = ({ errors, classPrefix }) => {
         />
         {errors.email && <p className={`${classPrefix}-error-message`}>{errors.email.message}</p>}
 
-        <div className={`${classPrefix}-password-field-container`}>
-          <input
-            type={showPassword ? "text" : "password"}
-            placeholder="Password"
-            className={`${classPrefix}-input-field`}
-            {...register("password", { required: "Password is required" })}
-          />
-          <button
-            type="button"
-            className={`${classPrefix}-password-toggle`}
-            onClick={() => setShowPassword(!showPassword)}
-            aria-label={showPassword ? "Hide password" : "Show password"}
-          >
-            {showPassword ? <Eye size={18} /> : <Eye size={18} />}
-          </button>
-        </div>
+        <input
+          type="password"
+          placeholder="Password"
+          className={`${classPrefix}-input-field`}
+          {...register("password", { required: "Password is required" })}
+        />
         {errors.password && <p className={`${classPrefix}-error-message`}>{errors.password.message}</p>}
 
-        <div className={`${classPrefix}-password-field-container`}>
-          <input
-            type={showConfirmPassword ? "text" : "password"}
-            placeholder="Confirm Password"
-            className={`${classPrefix}-input-field`}
-            {...register("confirmPassword", {
-              required: "Please confirm your password",
-              validate: (value) => value === watch("password") || "Passwords do not match",
-            })}
-          />
-          <button
-            type="button"
-            className={`${classPrefix}-password-toggle`}
-            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-            aria-label={showConfirmPassword ? "Hide password" : "Show password"}
-          >
-            {showConfirmPassword ? <Eye size={18} /> : <Eye size={18} />}
-          </button>
-        </div>
+        <input
+          type="password"
+          placeholder="Confirm Password"
+          className={`${classPrefix}-input-field`}
+          {...register("confirmPassword", {
+            required: "Please confirm your password",
+            validate: (value) => value === watch("password") || "Passwords do not match",
+          })}
+        />
         {errors.confirmPassword && <p className={`${classPrefix}-error-message`}>{errors.confirmPassword.message}</p>}
-
-        {passwordsMatch && !errors.confirmPassword && (
-          <div className={`${classPrefix}-password-match ${classPrefix}-match`}>
-            <CheckCircle size={16} />
-            <span>Passwords match!</span>
-          </div>
-        )}
-
-        {passwordsMismatch && !errors.confirmPassword && (
-          <div className={`${classPrefix}-password-match ${classPrefix}-mismatch`}>
-            <AlertCircle size={16} />
-            <span>Passwords do not match</span>
-          </div>
-        )}
 
         <p className={`${classPrefix}-password-requirements`}>
           Password must be at least 8 characters and include uppercase, lowercase, number, and special character.
@@ -673,20 +635,7 @@ const AccountCreationStep = ({ errors, classPrefix }) => {
   )
 }
 
-const ProcessingPage = ({ classPrefix, logo }) => {
-  const [factIndex, setFactIndex] = useState(0)
-  const facts = [
-    "Bananas are berries, but strawberries aren't!",
-  ]
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setFactIndex((prevIndex) => (prevIndex + 1) % facts.length)
-    }, 100)
-
-    return () => clearInterval(interval)
-  }, [])
-
+const ProcessingPage = ({ classPrefix, logo, tips }) => {
   return (
     <div className={`${classPrefix}-processing-page`}>
       <div className={`${classPrefix}-logo`}>
@@ -694,12 +643,14 @@ const ProcessingPage = ({ classPrefix, logo }) => {
       </div>
       <div className={`${classPrefix}-processing-container`}>
         <h2 className={`${classPrefix}-processing-text`}>Processing Your Information</h2>
-        <div className={`${classPrefix}-banana-loader`}>
-          <div className={`${classPrefix}-banana`}></div>
-        </div>
-        <div className={`${classPrefix}-fun-fact-box`}>
-          <p className={`${classPrefix}-fun-fact-title`}>🍌 Banana Fact!</p>
-          <p className={`${classPrefix}-fun-fact-text`}>{facts[factIndex]}</p>
+        <div className={`${classPrefix}-loading-indicator`}></div>
+        <div className={`${classPrefix}-info-box`}>
+          <p className={`${classPrefix}-info-title`}>💡 Did You Know?</p>
+          <p className={`${classPrefix}-info-text`}>
+            "Regular exercise boosts your resting metabolism, meaning your body continues to burn calories even while
+            you're at rest!"
+          </p>
+          <img src={tips || "/placeholder.svg"} alt="exercise tip" className={`${classPrefix}-info-image`} />
         </div>
       </div>
     </div>
